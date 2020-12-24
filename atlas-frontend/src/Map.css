@@ -1,0 +1,11 @@
+body {
+    background: rgb(135, 202, 235);
+}
+
+#map {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    left: 100px;
+    bottom: 100px;
+    }
