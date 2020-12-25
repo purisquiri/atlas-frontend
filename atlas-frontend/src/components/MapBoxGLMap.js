@@ -2,10 +2,7 @@ import '../Map.css'
 import mapboxgl from "mapbox-gl";
 import React, { useState, useEffect } from "react";
 
-const MapboxGLMap = () => {
-    // const [map] = useState(null);
-    const [countries, updateCountries] = useState(["in", "iso_3166_1_alpha_3"]);
-    const [search, updateSearch] = useState("")
+const MapboxGLMap = ({countries}) => {
     const mapContainer = React.createRef();
   
     useEffect(() => {
@@ -21,7 +18,7 @@ const MapboxGLMap = () => {
   
         map.on("load", () => {
           // setMap(map);
-          // map.resize();
+           map.resize();
           map.addLayer(
             {
               id: "country-boundaries",
@@ -44,28 +41,9 @@ const MapboxGLMap = () => {
       
     });
   
-    const handleSearch = (event) => {
-      //   updateSearch(search)
-      console.log(event.target.value)
-        
-    }
-  
-  
-     const handleChange = (event) => {
-     updateCountries([...countries, event.target.value])
-  
-      console.log(countries)
-      console.log(event.target.value.toString())
-      
-    };
   
     return (
     <div>
-    <select onChange={(event) => handleChange(event)}>
-      <option value="USA">United States</option>
-      <option value="ITA">Italy</option>
-      <option value="IRL">Ireland</option>
-    </select> 
     {
     <div id="map"></div>
     }
