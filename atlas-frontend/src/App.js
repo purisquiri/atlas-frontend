@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import LoginContainer from './containers/LoginContainer'
 import HomeContainer from './containers/HomeContainer'
 import Navbar from './containers/Navbar' 
+import SignIn from './containers/LoginContainer';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <HomeContainer />
-        <Navbar/>
+        <SignIn/>
+        {/* <HomeContainer />
+        <Navbar/> */}
+        
+
       </div>
     );
   }
