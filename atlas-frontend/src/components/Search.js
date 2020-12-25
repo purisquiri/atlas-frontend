@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchBar from "material-ui-search-bar";
 
 function Search({handleSearch}) {
     return (
@@ -10,6 +11,11 @@ function Search({handleSearch}) {
           <input type="submit" value="Search" className="btn btn-success" />
         </div>
       </form>
+    //  <SearchBar onSubmit={(event) => handleSearch(event)}>
+    //  <label>Search by Country Code:</label>
+    //      <input type="text" name="search"  />
+    //      <input type="submit" value="Search" />
+    //   </SearchBar>
 
    
     );

@@ -8,9 +8,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SignIn/>
-        {/* <HomeContainer />
-        <Navbar/> */}
+        {/* <SignIn/> */}
+        <HomeContainer />
+        <Navbar/>
         
 
       </div>

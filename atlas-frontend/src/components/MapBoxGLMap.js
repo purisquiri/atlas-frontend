@@ -2,6 +2,7 @@ import '../Map.css'
 import mapboxgl from "mapbox-gl";
 import React, { useState, useEffect } from "react";
 
+
 const MapboxGLMap = ({countries}) => {
     const mapContainer = React.createRef();
   
