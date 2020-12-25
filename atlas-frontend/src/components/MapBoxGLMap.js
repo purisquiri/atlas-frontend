@@ -52,7 +52,7 @@ const MapboxGLMap = () => {
   
   
      const handleChange = (event) => {
-     updateCountries([...countries, search])
+     updateCountries([...countries, event.target.value])
   
       console.log(countries)
       console.log(event.target.value.toString())
@@ -61,6 +61,11 @@ const MapboxGLMap = () => {
   
     return (
     <div>
+    <select onChange={(event) => handleChange(event)}>
+      <option value="USA">United States</option>
+      <option value="ITA">Italy</option>
+      <option value="IRL">Ireland</option>
+    </select> 
     {
     <div id="map"></div>
     }
