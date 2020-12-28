@@ -52,6 +52,28 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    
+    let data = {}
+    data.username = event.target.username.value
+    data.email = event.target.email.value
+    data.password = event.target.password.value
+    
+    
+    fetch('http://localhost:3000/api/v1/users', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(data => {localStorage.setItem("token", data.jwt)
+  })
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

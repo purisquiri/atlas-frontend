@@ -46,10 +46,30 @@ function Copyright() {
       margin: theme.spacing(3, 0, 2),
     },
   }));
+
+  const handleSubmit = (event) => {
+    event.preventDefault ()
+    fetch('http://localhost:3000/api/v1/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          user: {
+            username: event.target[0].value,
+            email: event.target[2].value,
+            password: event.target[4].value
+}})
+    })
+    .then(resp => resp.json())
+  .then(data => console.log(data)) 
+}
   
   export default function SignUp() {
     const classes = useStyles();
-  
+    
+
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -58,9 +78,9 @@ function Copyright() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign Up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={(event) => handleSubmit(event)}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -78,7 +98,7 @@ function Copyright() {
               required
               fullWidth
               id="email"
-              label="Email"
+              label="mail"
               name="email"
               autoComplete="email"
               autoFocus
@@ -98,7 +118,7 @@ function Copyright() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <Button 
               type="submit"
               fullWidth
               variant="contained"
