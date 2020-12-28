@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from '../Login.css'
+import signUp from './SignUpContainer'
 
 
 function Copyright() {
@@ -104,7 +105,7 @@ export default function SignIn() {
               </Link> */}
             </Grid>
             <Grid item container>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

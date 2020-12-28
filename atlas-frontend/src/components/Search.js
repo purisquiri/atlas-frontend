@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from "material-ui-search-bar";
+import Modal from './Modal'
 
 function Search({handleSearch}) {
     return (

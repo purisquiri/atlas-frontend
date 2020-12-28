@@ -3,6 +3,7 @@ import MapboxGLMap from '../components/MapBoxGLMap'
 import Search from '../components/Search'
 
 
+
 class HomeContainer extends Component {
 
     constructor() {
@@ -25,6 +26,7 @@ class HomeContainer extends Component {
     render() {
         return (
             <div>
+          
                 <Search handleSearch={this.handleSearch}/>
                 <MapboxGLMap countries={this.state.countries}/>
             </div>
