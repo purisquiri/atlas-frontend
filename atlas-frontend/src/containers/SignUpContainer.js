@@ -67,7 +67,8 @@ function Copyright() {
     const classes = useStyles();
 
     const handleSubmit = (event) => {
-        event.preventDefault ()
+        event.preventDefault()
+        
         fetch('http://localhost:3000/api/v1/users', {
             method: 'POST',
             headers: {
@@ -76,13 +77,14 @@ function Copyright() {
             },
             body: JSON.stringify({
               user: {
-                username: event.target[0].value,
-                email: event.target[2].value,
-                password: event.target[4].value
+                username: username,
+                email: email,
+                password: password
     }})
         })
         .then(resp => resp.json())
       .then(data => {
+          console.log(data)
           localStorage.setItem("token", data.jwt)
           history.push("/")
       }) 
@@ -115,6 +117,8 @@ function Copyright() {
               name="username"
               autoComplete="username"
               autoFocus
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
             />
              <TextField
               variant="outlined"
@@ -126,6 +130,8 @@ function Copyright() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
             <TextField
               variant="outlined"
@@ -137,6 +143,8 @@ function Copyright() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
