@@ -6,13 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './containers/LoginContainer'
 import SignUp from './containers/SignUpContainer'
+import HomeContainer from './containers/HomeContainer'
 
 ReactDOM.render(
   <Router>
   <div>
-    <Route exact path="/" component={App} />
-    <Route exact path = "/login" component={Login}/>
-    <Route exact path = "/signup" component={SignUp}/>
+    <Route exact path="/" component={App}/>
+    <Route exact path="/signup" component={SignUp}/>
+    <Route exact path="/home" component={HomeContainer}/>
+    <Route exact path="/login" component={Login}/>
     </div>
     </Router>,
   document.getElementById('app')

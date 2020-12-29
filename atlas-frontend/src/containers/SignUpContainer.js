@@ -57,7 +57,7 @@ function Copyright() {
 
   
   
-  export default function SignUp() {
+  export default function SignUp({handleUser}) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
@@ -86,6 +86,7 @@ function Copyright() {
       .then(data => {
           console.log(data)
           localStorage.setItem("token", data.jwt)
+          handleUser(data.user)
           history.push("/")
       }) 
       .catch(errors => {
@@ -158,6 +159,15 @@ function Copyright() {
             >
               Create Account
             </Button>
+            <Grid container>
+            <Grid item xs>
+            </Grid>
+            <Grid item container>
+              <Link href="/login" variant="body2">
+                {"Already have an account? Sign In"}
+              </Link>
+            </Grid>
+          </Grid>
             
           </form>
         </div>

@@ -1,16 +1,33 @@
 import React, { Component } from 'react';
-import LoginContainer from './containers/LoginContainer'
 import HomeContainer from './containers/HomeContainer'
 import Navbar from './containers/Navbar' 
 import SignIn from './containers/LoginContainer';
+import SignUp from './containers/SignUpContainer';
+import { Route } from 'react-router-dom';
+
 // import { Route } from 'react-router-dom';
 
 class App extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      user: []
+    }
+  }
+
+  handleUser = (userData) => {
+    this.setState({
+      user: userData
+    })
+  }
+
   render() {
     return (
       <div>
-        {/* <SignIn/> */}
-        < HomeContainer />
+         <Route path ="/signup" component={<SignUp handleUser={this.handleUser}/>}/>
+        
+       <Route path = "/home" component={<HomeContainer/>}/>
         <Navbar/>
         
 
