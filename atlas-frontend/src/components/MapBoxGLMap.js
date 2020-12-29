@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 
 const MapboxGLMap = ({countries}) => {
+  const [countryNames, newNames] = useState(["name_en"])
     const mapContainer = React.createRef();
   
     useEffect(() => {
@@ -12,7 +13,7 @@ const MapboxGLMap = ({countries}) => {
       let firstPart = ["in", "iso_3166_1_alpha_3"]
         const map = new mapboxgl.Map({
          container: "map",
-          style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+          style: "mapbox://styles/jacobkagon/ckjak6kt589rb19p228nwrycv", // stylesheet location
           center: [5, 46],
           zoom: 2,
         });
@@ -30,7 +31,7 @@ const MapboxGLMap = ({countries}) => {
               "source-layer": "country_boundaries",
               type: "fill",
               paint: {
-                "fill-color": "#d2361e",
+                "fill-color": "#780000 ",
                 "fill-opacity": 0.4,
               },
             },
