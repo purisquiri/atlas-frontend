@@ -9,7 +9,7 @@ const MapboxGLMap = ({countries}) => {
     useEffect(() => {
       mapboxgl.accessToken =
         "pk.eyJ1IjoiamFjb2JrYWdvbiIsImEiOiJja2owZHM4NGUxbTN1MnJtd25pbHh5a2YwIn0.Ipv-6ntDnJw4WUD9ly3gcw";
-      
+      let firstPart = ["in", "iso_3166_1_alpha_3"]
         const map = new mapboxgl.Map({
          container: "map",
           style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
@@ -36,7 +36,7 @@ const MapboxGLMap = ({countries}) => {
             },
             "country-label"
           );
-          map.setFilter("country-boundaries", countries);
+          map.setFilter("country-boundaries", firstPart.concat(countries));
         });
   
       

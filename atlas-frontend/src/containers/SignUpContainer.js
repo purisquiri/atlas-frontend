@@ -73,7 +73,7 @@ function Copyright() {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Accept: 'application/json'
+              'Accept': 'application/json'
             },
             body: JSON.stringify({
               user: {
@@ -91,7 +91,6 @@ function Copyright() {
       .catch(errors => {
         setErrors(errors);
         console.error(errors);
-
       })
     }
     
