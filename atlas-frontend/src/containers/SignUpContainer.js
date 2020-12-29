@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from '../Login.css'
+import { 
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+    useHistory 
+  } from "react-router-dom";
+ 
 
 function Copyright() {
     return (
@@ -47,27 +55,43 @@ function Copyright() {
     },
   }));
 
-  const handleSubmit = (event) => {
-    event.preventDefault ()
-    fetch('http://localhost:3000/api/v1/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify({
-          user: {
-            username: event.target[0].value,
-            email: event.target[2].value,
-            password: event.target[4].value
-}})
-    })
-    .then(resp => resp.json())
-  .then(data => console.log(data)) 
-}
+  
   
   export default function SignUp() {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState([]);
+    const history = useHistory();
+
     const classes = useStyles();
+
+    const handleSubmit = (event) => {
+        event.preventDefault ()
+        fetch('http://localhost:3000/api/v1/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({
+              user: {
+                username: event.target[0].value,
+                email: event.target[2].value,
+                password: event.target[4].value
+    }})
+        })
+        .then(resp => resp.json())
+      .then(data => {
+          localStorage.setItem("token", data.jwt)
+          history.push("/")
+      }) 
+      .catch(errors => {
+        setErrors(errors);
+        console.error(errors);
+
+      })
+    }
     
 
     return (
@@ -98,7 +122,7 @@ function Copyright() {
               required
               fullWidth
               id="email"
-              label="mail"
+              label="email"
               name="email"
               autoComplete="email"
               autoFocus
