@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from '../Login.css'
 import signUp from './SignUpContainer'
+import { 
+  BrowserRouter as Router,
+  
+  useHistory 
+} from "react-router-dom";
 
 
 function Copyright() {
@@ -49,30 +54,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn({handleUser}) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]);
+  const history = useHistory();
   const classes = useStyles();
 
   const handleSubmit = (event) => {
     event.preventDefault()
     
-    let data = {}
-    data.username = event.target.username.value
-    data.email = event.target.email.value
-    data.password = event.target.password.value
-    
-    
-    fetch('http://localhost:3000/api/v1/users', {
+    fetch('http://localhost:3000/api/v1/login', {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        user: {
+         username,
+         password
+}})
     })
     .then(resp => resp.json())
-    .then(data => {localStorage.setItem("token", data.jwt)
-  })
-  }
+    .then(data => {
+      console.log(data)
+      localStorage.setItem("token", data.jwt)
+      handleUser(data.user)
+      history.push("/home");
+    })
+     
+  .catch(errors => {
+    setErrors(errors);
+    console.error(errors);
+  });
+  setUsername("")
+  setPassword("")
+
+}
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -84,7 +104,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={e => handleSubmit(e)}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -95,6 +115,8 @@ export default function SignIn() {
             name="username"
             autoComplete="username"
             autoFocus
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
           />
           <TextField
             variant="outlined"
@@ -106,6 +128,8 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

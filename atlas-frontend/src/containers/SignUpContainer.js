@@ -15,9 +15,6 @@ import Container from '@material-ui/core/Container';
 import Login from '../Login.css'
 import { 
     BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect,
     useHistory 
   } from "react-router-dom";
  
@@ -77,18 +74,18 @@ function Copyright() {
             },
             body: JSON.stringify({
               user: {
-                username: username,
-                email: email,
-                password: password
+                 username,
+                 email,
+                 password
     }})
         })
         .then(resp => resp.json())
       .then(data => {
           console.log(data)
           localStorage.setItem("token", data.jwt)
-          handleUser(data.user)
-          history.push("/")
-      }) 
+           handleUser(data.user)
+          history.push("/home")
+      })    
       .catch(errors => {
         setErrors(errors);
         console.error(errors);
@@ -119,6 +116,7 @@ function Copyright() {
               autoFocus
               value={username}
               onChange={(event) => setUsername(event.target.value)}
+            
             />
              <TextField
               variant="outlined"
