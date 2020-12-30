@@ -1,23 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Login from './containers/LoginContainer'
-import SignUp from './containers/SignUpContainer'
-import HomeContainer from './containers/HomeContainer'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Login from "./containers/LoginContainer";
+import SignUp from "./containers/SignUpContainer";
+import HomeContainer from "./containers/HomeContainer";
 
 ReactDOM.render(
   <Router>
-  <div>
-    <Route exact path="/" component={App}/>
-    <Route exact path="/signup" component={SignUp}/>
-    <Route exact path="/home" component={HomeContainer}/>
-    <Route exact path="/login" component={Login}/>
-    </div>
-    </Router>,
-  document.getElementById('app')
+    <App />
+  </Router>,
+  document.getElementById("app")
 );
 
 // If you want to start measuring performance in your app, pass a function

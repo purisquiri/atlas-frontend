@@ -25,12 +25,11 @@ class App extends Component {
   render() {
     return (
       <div>
-         <Route path ="/signup" component={<SignUp handleUser={this.handleUser}/>}/>
-        
-       <Route path = "/home" component={<HomeContainer/>}/>
+         <Route path ="/signup" component={props => <SignUp {...props} handleUser={this.handleUser}/>}/>
+         <Route path ="/login" component={props => <SignIn {...props} handleUser={this.handleUser}/>}/>
+         <Route path ="/home" component={HomeContainer}/>
         <Navbar/>
         
-
       </div>
     );
   }
