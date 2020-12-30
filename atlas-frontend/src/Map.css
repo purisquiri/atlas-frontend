@@ -1,11 +1,14 @@
 body {
+
+=======
     background: #F5F5F5;
+
 }
 
 #map {
-    position: absolute;
-    top: 200px;
-    right: 500px;
-    left: 150px;
-    bottom: 100px;
-    }
+  position: absolute;
+  top: 200px;
+  right: 500px;
+  left: 150px;
+  bottom: 100px;
+}
