@@ -7,25 +7,25 @@ function Search({ handleSearch }) {
   const [event, newEvent] = useState("");
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (event !== "") {
-      fetch("http://localhost:3000/api/v1/countries", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          country_code: event,
-        }),
-      })
-        .then((resp) => resp.json())
-        .then((data) => console.log(data.country_code));
+  // useEffect(() => {
+  //   if (event !== "") {
+  //     fetch("http://localhost:3000/api/v1/countries", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({
+  //         country_code: event,
+  //       }),
+  //     })
+  //       .then((resp) => resp.json())
+  //       .then((data) => console.log(data.country_code));
        
-    }
+  //   }
     
-  });
+  // });
 
   const handleModal = (event) => {
     event.preventDefault();
@@ -47,7 +47,7 @@ function Search({ handleSearch }) {
       <form onSubmit={(e) => handleModal(e)}>
         <div className="form-group">
           <label>Search by Country Code:</label>
-          <input type="text" name="search" className="form-control" />
+          <input type="text" name="search" placeholder="Three Letter Code" className="form-control" />
           <input type="submit" value="Search" className="btn btn-success" />
         </div>
       </form>
