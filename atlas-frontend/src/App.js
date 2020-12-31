@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HomeContainer from "./containers/HomeContainer";
-import Navbar from "./containers/Navbar";
+
 import SignIn from "./containers/LoginContainer";
 import SignUp from "./containers/SignUpContainer";
 import { Route } from "react-router-dom";
@@ -86,7 +86,7 @@ export default function App() {
       
       <FavoritesContainer countries={countries} changeCountries={changeCountries}/> 
       
-      <Navbar />
+  
     </div>
   );
 }
