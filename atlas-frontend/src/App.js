@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HomeContainer from "./containers/HomeContainer";
-import Navbar from "./containers/Navbar";
+
 import SignIn from "./containers/LoginContainer";
 import SignUp from "./containers/SignUpContainer";
 import { Route } from "react-router-dom";
@@ -42,7 +42,6 @@ class App extends Component {
         <Route path="/home" component={HomeContainer} />
         <Route exact path="/" component={Cover} />
         <Route exact path="/" component={Globe} />
-        <Navbar />
       </div>
     );
   }
