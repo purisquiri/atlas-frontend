@@ -1,21 +1,38 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 
 const token = localStorage.getItem("token");
-const USERID = localStorage.getItem("user_id")
+const USERID = localStorage.getItem("user_id");
 
-export default class FavoritesContainer extends Component {
-  componentDidMount() {
-    fetch(`http://localhost:3000/api/v1/users/${USERID}`, {
-      headers: { Authorization: `Bearer ${token}`},
+const FavoritesContainer = ({countryId}) => {
+  //   componentDidMount() {
+  //     fetch(`http://localhost:3000/api/v1/users/${USERID}`, {
+  //       headers: { Authorization: `Bearer ${token}`},
+  //     })
+  //       .then((resp) => resp.json())
+  //       .then((data) =>
+  //         data.countries.map((country) => (
+  //             this.props.changeCountries([...this.props.countries, country.country_code])))
+  //       );
+  //   }
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/v1/favorites", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        user_id: USERID,
+        country_id: countryId,
+      }),
     })
       .then((resp) => resp.json())
-      .then((data) =>
-        data.countries.map((country) => (
-            this.props.changeCountries([...this.props.countries, country.country_code])))
-      );
-  }
+      .then((data) => console.log(data));
+  });
 
-  render() {
-    return <div></div>;
-  }
-}
+  return <div></div>;
+};
+
+export default FavoritesContainer;
