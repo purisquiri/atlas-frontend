@@ -17,6 +17,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import Logout from '../components/Logout'
 
 const drawerWidth = 240;
 
@@ -81,6 +82,7 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [logout, setLogout] = React.useState(false)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -90,7 +92,11 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+ 
+
+
   return (
+
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -135,14 +141,18 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
           {["Reviews", "Favorites", "Log Out", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem onClick={() => setLogout(true)} button key={text}  id={index}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
+
           ))}
+        
         </List>
+
+        {logout === true ? <Logout /> : null}
         <Divider />
         {/* <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (

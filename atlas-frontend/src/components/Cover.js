@@ -12,13 +12,13 @@ export default function Cover() {
                 <nav>
                   <ul className="nav masthead-nav">
                     <li className="active">
-                      <a href="#">Home</a>
+                      <a href="/home">Map</a>
                     </li>
                     <li>
-                      <a href="#">Map</a>
+                      <a href="/login">Login</a>
                     </li>
                     <li>
-                      <a href="#">SignUp</a>
+                      <a href="./signup">SignUp</a>
                     </li>
                   </ul>
                 </nav>

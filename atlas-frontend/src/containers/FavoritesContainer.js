@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 const token = localStorage.getItem("token");
 const USERID = localStorage.getItem("user_id");
 
-const FavoritesContainer = ({countryId}) => {
+const FavoritesContainer = ({countryId, changeFavorites}) => {
   //   componentDidMount() {
   //     fetch(`http://localhost:3000/api/v1/users/${USERID}`, {
   //       headers: { Authorization: `Bearer ${token}`},
@@ -29,7 +29,7 @@ const FavoritesContainer = ({countryId}) => {
       }),
     })
       .then((resp) => resp.json())
-      .then((data) => console.log(data));
+      .then((data) => localStorage.setItem("favorites_id", data.id));
   });
 
   return <div></div>;

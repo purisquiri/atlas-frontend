@@ -31,7 +31,7 @@ const MapboxGLMap = ({countries}) => {
               "source-layer": "country_boundaries",
               type: "fill",
               paint: {
-                "fill-color": "#780000 ",
+                "fill-color": "#780000",
                 "fill-opacity": 0.4,
               },
             },

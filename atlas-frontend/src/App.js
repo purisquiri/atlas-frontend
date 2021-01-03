@@ -11,6 +11,7 @@ import "./App.css";
 
 const token = localStorage.getItem("token");
 const USERID = localStorage.getItem("user_id");
+const favoritesId = localStorage.getItem("favorites_id");
 
 class App extends Component {
   constructor() {
@@ -27,13 +28,13 @@ class App extends Component {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((resp) => resp.json())
-        .then((data) =>
+        .then((data) => {
           data.countries.map((country) =>
             this.setState({
               countries: [...this.state.countries, country.country_code],
             })
-          )
-        );
+          );
+        });
     }
   }
 
@@ -42,6 +43,29 @@ class App extends Component {
   };
 
   handleSearch = (event) => {
+    fetch("http://localhost:3000/api/v1/countries", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        data.filter((country) => {
+          if (country.country_code === event && !this.state.countries.includes(country.country_code)) {
+            this.setState({
+              countries: [...this.state.countries, country.country_code],
+              countryId: country.id,
+            });
+          } else if(this.state.countries.includes(undefined)) {
+          
+            window.location.reload()
+            
+
+          }
+        });
+      });
+      this.addCountry(event)
+  };
+
+  addCountry = (event) => {
     fetch("http://localhost:3000/api/v1/countries", {
       method: "POST",
       headers: {
@@ -54,13 +78,27 @@ class App extends Component {
       }),
     })
       .then((resp) => resp.json())
-      .then((data) =>
+      .then((data) => {
         this.setState({
           countries: [...this.state.countries, data.country_code],
           countryId: data.id,
-        })
-      );
+        });
+      });
   };
+
+  deleteCountry = () => {
+    fetch(`http://localhost:3000/api/v1/favorites/${favoritesId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
+
+  // changeFavorites = (event) => {
+  // this.setState({
+  //   favoritesId: event
+  // })
+
+  // }
 
   render() {
     return (
@@ -71,6 +109,7 @@ class App extends Component {
             <SignUp {...props} handleUser={this.handleUser} />
           )}
         />
+
         <Route
           path="/login"
           component={(props) => (
@@ -82,6 +121,7 @@ class App extends Component {
           component={(props) => (
             <HomeContainer
               {...props}
+              deleteCountry={this.deleteCountry}
               handleSearch={this.handleSearch}
               countries={this.state.countries}
             />
@@ -89,11 +129,9 @@ class App extends Component {
         />
         <Route exact path="/" component={Cover} />
         <Route exact path="/" component={Globe} />
-{
-  this.state.countryId !== "" ?
-        <FavoritesContainer countryId={this.state.countryId} /> :
-        null
-}
+        {this.state.countryId !== "" ? (
+          <FavoritesContainer countryId={this.state.countryId} />
+        ) : null}
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "material-ui-search-bar";
 import SimpleModal from "./Modal";
 
-function Search({ handleSearch }) {
+function Search({ handleSearch, deleteCountry }) {
   const [modal, changeModal] = useState(false);
   const [event, newEvent] = useState("");
   const token = localStorage.getItem("token");
@@ -42,6 +42,7 @@ function Search({ handleSearch }) {
           handleSearch={handleSearch}
           event={event}
           open={modal}
+          deleteCountry={deleteCountry}
         />
       ) : null}
       <form onSubmit={(e) => handleModal(e)}>

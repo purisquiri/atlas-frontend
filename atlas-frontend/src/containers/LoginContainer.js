@@ -63,7 +63,7 @@ export default function SignIn({ handleUser }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         user: {
@@ -72,20 +72,16 @@ export default function SignIn({ handleUser }) {
         },
       }),
     })
-    
       .then((resp) => resp.json())
       .then((data) => {
         localStorage.setItem("token", data.jwt);
         handleUser(data.user);
-        if(data.user) {
+        if (data.user) {
           history.push("/home");
-          }
-      })
-
-     
+        }
+      });
     setUsername("");
     setPassword("");
-  
   };
 
   return (
