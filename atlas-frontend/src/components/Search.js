@@ -30,7 +30,7 @@ function Search({ handleSearch, deleteCountry }) {
   const handleModal = (event) => {
     event.preventDefault();
     changeModal(true);
-    newEvent(event.target.search.value);
+    newEvent(event.target.search.value.toUpperCase());
     document.getElementsByTagName("form")[0].reset();
   };
 
