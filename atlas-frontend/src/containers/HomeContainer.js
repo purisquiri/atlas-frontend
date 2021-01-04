@@ -7,6 +7,8 @@ import FavoritesContainer from "./FavoritesContainer";
 const token = localStorage.getItem("token");
 const USERID = localStorage.getItem("user_id");
 const favoritesId = localStorage.getItem("favorites_id");
+
+
 class HomeContainer extends Component {
   constructor() {
     super();
@@ -90,18 +92,11 @@ class HomeContainer extends Component {
     console.log(newCountry)
   }
 
+
+
  
 
   setModal = (openOrClose) => this.setState({ modalOpen: openOrClose });
-
-  // changeFavorites = (event) => {
-  // this.setState({
-  //   favoritesId: event
-  // })
-
-  // }
-
-
 
 
   render() {
@@ -112,6 +107,7 @@ class HomeContainer extends Component {
             ? [
                 <Navbar key={1} />,
                 <Search
+                  handleAddReview={this.props.handleAddReview}
                   key={2}
                   handleSearch={this.handleSearch}
                   setModal={this.setModal}
@@ -121,9 +117,9 @@ class HomeContainer extends Component {
               ]
             : null}
         </div>
-        <MapboxGLMap countries={this.state.countries} />
+        <MapboxGLMap key={3} countries={this.state.countries} />
         {this.state.countryId !== "" ? (
-          <FavoritesContainer countryId={this.state.countryId} />
+          <FavoritesContainer key={4} countryId={this.state.countryId} />
         ) : null}
       </div>
     );

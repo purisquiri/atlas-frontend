@@ -28,7 +28,7 @@ function rand() {
     },
   }));
   
-  export default function SimpleModal({deleteCountries, handleSearch, event, changeModal, open}) {
+  export default function SimpleModal({handleAddReview, deleteCountries, handleSearch, event, changeModal, open}) {
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
@@ -49,8 +49,8 @@ function rand() {
           Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
         </p>
         <button onClick={() => handleSearch(event)}>Add to Places Visited</button>
+        <button onClick={() => handleAddReview()}>Add a Review</button>
         <button onClick={() => deleteCountries(event)}>Delete</button>
-        
       </div>
     );
   

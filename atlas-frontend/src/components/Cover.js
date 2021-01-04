@@ -18,7 +18,7 @@ export default function Cover() {
                       <a href="/login">Login</a>
                     </li>
                     <li>
-                      <a href="./signup">SignUp</a>
+                      <a href="/signup">SignUp</a>
                     </li>
                   </ul>
                 </nav>

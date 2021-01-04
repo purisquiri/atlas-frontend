@@ -4,7 +4,7 @@ import SimpleModal from "./Modal";
 
 const USERID = localStorage.getItem("user_id")
 
-function Search({ handleSearch, removeCountry}) {
+function Search({ handleAddReview, handleSearch, removeCountry}) {
   const [modal, changeModal] = useState(false);
   const [event, newEvent] = useState("");
   const [country, newCountry] = useState([]);
@@ -66,6 +66,7 @@ function Search({ handleSearch, removeCountry}) {
     <div>
       {modal ? (
         <SimpleModal
+        handleAddReview={handleAddReview}
           changeModal={changeModal}
           handleSearch={handleSearch}
           event={event}

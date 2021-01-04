@@ -3,16 +3,25 @@ import HomeContainer from "./containers/HomeContainer";
 
 import SignIn from "./containers/LoginContainer";
 import SignUp from "./containers/SignUpContainer";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import Globe from "./components/Globe";
 import Cover from "./components/Cover";
+import AddReview from "./components/AddReview"
 import "./App.css";
+
 
 const token = localStorage.getItem("token");
 const USERID = localStorage.getItem("user_id");
 const favoritesId = localStorage.getItem("favorites_id");
 
 class App extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+     redirect: null
+    }
+  }
   
   
   handleUser = (userData) => {
@@ -20,8 +29,17 @@ class App extends Component {
     localStorage.setItem("username", userData.username)
   };
 
+  handleAddReview = () => {
+    this.setState({
+      redirect: '/reviews'
+    })
+  }
+
  
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
     return (
       <div>
         <Route
@@ -37,11 +55,11 @@ class App extends Component {
             <SignIn {...props} handleUser={this.handleUser} />
           )}
         />
-        <Route path="/home" component={HomeContainer} />
-
+        <Route path="/home" component={props => <HomeContainer {...props} handleAddReview={this.handleAddReview}/>} />
         <Route exact path="/" component={Cover} />
         <Route exact path="/" component={Globe} />
-
+        <Route  exact path="/reviews" component={AddReview}/>
+      
       </div>
     );
   }
