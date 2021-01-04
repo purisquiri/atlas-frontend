@@ -17,6 +17,7 @@ class App extends Component {
   
   handleUser = (userData) => {
     localStorage.setItem("user_id", userData.id);
+    localStorage.setItem("username", userData.username)
   };
 
  

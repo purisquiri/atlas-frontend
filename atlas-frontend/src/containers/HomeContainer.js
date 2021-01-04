@@ -10,15 +10,18 @@ const favoritesId = localStorage.getItem("favorites_id");
 class HomeContainer extends Component {
   constructor() {
     super();
+
     this.state = {
+      loggedIn: false,
       countries: [],
-      countryId: "",
       modalOpen: false,
+      countryId: ""
     };
   }
 
   componentDidMount() {
-    if (token) {
+    if(token) {
+    
       fetch(`http://localhost:3000/api/v1/users/${USERID}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -30,7 +33,8 @@ class HomeContainer extends Component {
             })
           );
         });
-    }
+      }
+    
   }
 
   handleSearch = (event) => {
@@ -49,6 +53,7 @@ class HomeContainer extends Component {
               countryId: country.id,
             });
           } else if (this.state.countries.includes(undefined)) {
+          
             window.location.reload();
           }
         });
@@ -77,12 +82,15 @@ class HomeContainer extends Component {
       });
   };
 
-  deleteCountry = () => {
-    fetch(`http://localhost:3000/api/v1/favorites/${favoritesId}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  };
+  removeCountry = (event) => {
+    let newCountry = this.state.countries.filter(country => country !== event)
+    this.setState({
+      countries: newCountry
+    })
+    console.log(newCountry)
+  }
+
+ 
 
   setModal = (openOrClose) => this.setState({ modalOpen: openOrClose });
 
@@ -92,6 +100,9 @@ class HomeContainer extends Component {
   // })
 
   // }
+
+
+
 
   render() {
     return (
@@ -104,8 +115,9 @@ class HomeContainer extends Component {
                   key={2}
                   handleSearch={this.handleSearch}
                   setModal={this.setModal}
-                  deleteCountry={this.deleteCountry}
+                  removeCountry={this.removeCountry}
                 />,
+                <a href="https://www.iban.com/country-codes" target="blank">Look up Country Codes</a>
               ]
             : null}
         </div>

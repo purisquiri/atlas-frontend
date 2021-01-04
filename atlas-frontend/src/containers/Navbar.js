@@ -91,9 +91,7 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
- 
-
+  
 
   return (
 
@@ -115,8 +113,12 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            ATLAS
+          <Typography variant="h4" noWrap>
+            ATLAS 
+          </Typography>
+          
+          <Typography align='center' variant="h6" noWrap>
+          Welcome {localStorage.getItem("username")}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -141,12 +143,20 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
           {["Reviews", "Favorites", "Log Out", "Drafts"].map((text, index) => (
+            index === 2 ?
             <ListItem onClick={() => setLogout(true)} button key={text}  id={index}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
+            </ListItem>:
+            <ListItem button key={text}  id={index}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
             </ListItem>
+
 
           ))}
         
