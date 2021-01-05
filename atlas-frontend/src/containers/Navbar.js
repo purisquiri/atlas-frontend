@@ -17,7 +17,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import Logout from '../components/Logout'
+import Logout from "../components/Logout";
+import Reviews from "./Reviews";
 
 const drawerWidth = 240;
 
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
+    // justifyContent: "flex-end",
   },
   content: {
     flexGrow: 1,
@@ -82,7 +83,8 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [logout, setLogout] = React.useState(false)
+  const [logout, setLogout] = React.useState(false);
+  const [openReview, setReview] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -91,10 +93,8 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
 
   return (
-
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -114,11 +114,11 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h4" noWrap>
-            ATLAS 
+            ATLAS
           </Typography>
-          
-          <Typography align='center' variant="h6" noWrap>
-          Welcome {localStorage.getItem("username")}
+
+          <Typography variant="h6" noWrap>
+            Welcome {localStorage.getItem("username")}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -142,27 +142,44 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          {["Reviews", "Favorites", "Log Out", "Drafts"].map((text, index) => (
-            index === 2 ?
-            <ListItem onClick={() => setLogout(true)} button key={text}  id={index}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>:
-            <ListItem button key={text}  id={index}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-
-
-          ))}
-        
+          {["Reviews", "Favorites", "Log Out", "Drafts"].map((text, index) =>
+            index === 2 ? (
+              <ListItem
+                onClick={() => setLogout(true)}
+                button
+                key={text}
+                id={index}
+              >
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ) : index === 0 ? (
+              <ListItem
+                onClick={() => setReview(true)}
+                button
+                key={text}
+                id={index}
+              >
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ) : (
+              <ListItem button key={text} id={index}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            )
+          )}
         </List>
 
         {logout === true ? <Logout /> : null}
+        {openReview === true ? <Reviews /> : null}
         <Divider />
         {/* <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
