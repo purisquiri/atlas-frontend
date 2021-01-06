@@ -17,37 +17,32 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
+ 
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }));
+  
+  export default function SimpleModal({countries, deleteCountries, handleSearch, event, changeModal, open}) {
+    const classes = useStyles();
+    // getModalStyle is not a pure function, we roll the style only on the first render
+    const [modalStyle] = React.useState(getModalStyle);
+    const [reviewModal, renderReviewModal] = React.useState(false)
+  
+    // const handleOpen = () => {
+    //   setOpen(true);
+    // };
+  
+    const handleClose = () => {
+      changeModal(false);
+    };
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: "absolute",
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
-export default function SimpleModal({
-  deleteCountries,
-  handleSearch,
-  event,
-  changeModal,
-  open,
-}) {
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
-  const [reviewModal, renderReviewModal] = React.useState(false);
-
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
-  const handleClose = () => {
-    changeModal(false);
-  };
 
   const handleAddReview = () => {
     renderReviewModal(true);
@@ -71,6 +66,7 @@ export default function SimpleModal({
           Open Modal
         </button> */}
 
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -78,11 +74,13 @@ export default function SimpleModal({
         aria-describedby="simple-modal-description"
       >
         {body}
-      </Modal>
+    
+        </Modal>
+        
+        {reviewModal === true ? <ReviewModal 
+          open={reviewModal} renderReviewModal={renderReviewModal} event={event} countries={countries}
+        /> : null} 
+      </div>
+    );
+  }
 
-      {reviewModal === true ? (
-        <ReviewModal open={reviewModal} renderReviewModal={renderReviewModal} />
-      ) : null}
-    </div>
-  );
-}
