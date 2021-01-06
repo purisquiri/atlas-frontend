@@ -153,7 +153,7 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
           {["Reviews", "Log Out", "Favorites"].map((text, index) =>
-            index === 2 ? (
+            index === 1 ? (
               <ListItem
                 onClick={() => setLogout(true)}
                 button
