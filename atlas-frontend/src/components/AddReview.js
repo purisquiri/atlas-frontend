@@ -15,19 +15,14 @@ const AddReview = ({ review }) => {
             <h4 style={{ margin: 0, textAlign: "left" }}>
               {review.user.username}
             </h4>
-            <Rating
-              value={review.rating}
-              max={5}
-              name="read-only"
-              readOnly
-            />
+            <Rating value={review.rating} max={5} name="read-only" readOnly />
             <p style={{ textAlign: "left" }}>{review.body}</p>
+            <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
             <p style={{ textAlign: "left", color: "gray" }}>
               posted on {dateString}
             </p>
           </Grid>
         </Grid>
-        <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
       </Paper>
     </div>
   );
