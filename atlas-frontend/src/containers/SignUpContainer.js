@@ -85,6 +85,7 @@ export default function SignUp({ handleUser }) {
         handleUser(data.user);
         if(data.user) {
         history.push("/home");
+        window.location.reload()
         }
       })  
       .catch((errors) => {

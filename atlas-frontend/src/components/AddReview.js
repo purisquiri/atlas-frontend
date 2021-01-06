@@ -2,7 +2,7 @@ import React from "react";
 import { Divider, Grid, Paper } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 
-const AddReview = ({ review }) => {
+const AddReview = ({ review, event }) => {
   let theDate = new Date(review.created_at);
   let dateString = theDate.toDateString();
 
@@ -15,6 +15,7 @@ const AddReview = ({ review }) => {
             <h4 style={{ margin: 0, textAlign: "left" }}>
               {review.user.username}
             </h4>
+            <h3>{review.country.country_code}</h3>
             <Rating value={review.rating} max={5} name="read-only" readOnly />
             <p style={{ textAlign: "left" }}>{review.body}</p>
             <Divider variant="fullWidth" style={{ margin: "30px 0" }} />

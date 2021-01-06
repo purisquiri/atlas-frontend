@@ -56,7 +56,7 @@ function getModalStyle() {
       </p>
       <button onClick={() => handleSearch(event)}>Add to Places Visited</button>
       <button onClick={() => handleAddReview()}>Add a Review</button>
-      <button onClick={() => deleteCountries(event)}>Delete</button>
+      <button onClick={() => deleteCountries(event)}>Delete</button> 
     </div>
   );
 
