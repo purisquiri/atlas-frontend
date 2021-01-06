@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import SearchBar from "material-ui-search-bar";
 import SimpleModal from "./Modal";
+const token = localStorage.getItem("token");
 
-const USERID = localStorage.getItem("user_id")
+const USERID = localStorage.getItem("user_id");
 
-function Search({ handleAddReview, handleSearch, removeCountry}) {
+function Search({ handleAddReview, handleSearch, removeCountry }) {
   const [modal, changeModal] = useState(false);
   const [event, newEvent] = useState("");
   const [country, newCountry] = useState([]);
-  const token = localStorage.getItem("token");
+  const [countryId, newId] = useState("");
 
   // useEffect(() => {
   //   if (event !== "") {
@@ -31,6 +32,7 @@ function Search({ handleAddReview, handleSearch, removeCountry}) {
   // });
 
   const handleModal = (event) => {
+  
     let newData = [];
     event.preventDefault();
     changeModal(true);
@@ -43,35 +45,43 @@ function Search({ handleAddReview, handleSearch, removeCountry}) {
       .then(
         (data) =>
           (newData = data.filter((newestCountry) => {
-            newCountry(country => [...country, newestCountry]);
+            newCountry((country) => [...country, newestCountry])
           }))
       );
+      filterCountryID(event)
+  };
+
+  const filterCountryID = (event) => {
+    country.filter((country) =>
+      country.country_code === event ? newId(country.id) : null
+    );
   };
 
   const deleteCountries = (event) => {
-    let countryId = ""
+    let countryIds = ""
     country.filter((country) =>
-      country.country_code === event ? countryId = country.id : null
+      country.country_code === event ? countryIds = country.id : null
     )
-    fetch(`http://localhost:3000/api/v1/favorites/${USERID}/${countryId}`, {
+    fetch(`http://localhost:3000/api/v1/favorites/${USERID}/${countryIds}`, {
       method: "DELETE",
-      headers: { Authorization: `Bearer ${token}`},
-    })
-    removeCountry(event)
-  }
-
-  
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    removeCountry(event);
+    newId(countryIds)
+  };
 
   return (
     <div>
       {modal ? (
         <SimpleModal
-        handleAddReview={handleAddReview}
+          handleAddReview={handleAddReview}
           changeModal={changeModal}
           handleSearch={handleSearch}
           event={event}
           open={modal}
           deleteCountries={deleteCountries}
+          countryId={countryId}
+
         />
       ) : null}
       <form onSubmit={(e) => handleModal(e)}>
