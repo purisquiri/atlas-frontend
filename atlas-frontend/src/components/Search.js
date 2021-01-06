@@ -32,8 +32,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
   // });
 
   const handleModal = (event) => {
-  
-    let newData = [];
+    let countryIds = []
     event.preventDefault();
     changeModal(true);
     newEvent(event.target.add.value.toUpperCase());
@@ -44,11 +43,11 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
       .then((resp) => resp.json())
       .then(
         (data) =>
-          (newData = data.filter((newestCountry) => {
+          (data.filter((newestCountry) => {
             newCountry((country) => [...country, newestCountry])
           }))
+      
       );
-      filterCountryID(event)
   };
 
   const filterCountryID = (event) => {
@@ -67,7 +66,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
       headers: { Authorization: `Bearer ${token}` },
     });
     removeCountry(event);
-    newId(countryIds)
+    
   };
 
   return (
@@ -81,6 +80,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
           open={modal}
           deleteCountries={deleteCountries}
           countryId={countryId}
+          countries={country}
 
         />
       ) : null}
