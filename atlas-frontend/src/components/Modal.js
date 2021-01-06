@@ -29,7 +29,7 @@ function getModalStyle() {
     },
   }));
   
-  export default function SimpleModal({countries, deleteCountries, handleSearch, event, changeModal, open}) {
+  export default function SimpleModal({countryName, countries, deleteCountries, handleSearch, event, changeModal, open}) {
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
@@ -50,7 +50,7 @@ function getModalStyle() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">{event}</h2>
+      <h2 id="simple-modal-title">{countryName}</h2>
       <p id="simple-modal-description">
         Click to choose an option or click the map to leave
       </p>

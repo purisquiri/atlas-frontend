@@ -33,6 +33,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
   const [event, newEvent] = useState("");
   const [country, newCountry] = useState([]);
   const [countryId, newId] = useState("");
+  const [countryName, newCountryName] = useState("")
 
   // useEffect(() => {
   //   if (event !== "") {
@@ -54,10 +55,14 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
 
   // });
 
-  const handleModal = (event) => {
+  const handleModal = (value) => {
+    let countryCode = country.map(country => (
+       country.country_code
+    ))
     let countryIds = []
     changeModal(true);
-    newEvent(event);
+    newEvent(value.newCode);
+    newCountryName(value.label)
     document.getElementsByTagName("form")[0].reset();
     fetch("http://localhost:3000/api/v1/countries", {
       headers: { Authorization: `Bearer ${token}` },
@@ -66,7 +71,14 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
       .then(
         (data) =>
           (data.filter((newestCountry) => {
-            newCountry((country) => [...country, newestCountry])
+            if (!countryCode.includes(newestCountry.country_code)) {
+              let filterCountry = newestCountry
+              newCountry(country => [...country, filterCountry])
+            }
+        
+            // newCountry(country => [...country, newestCountry.country_code])
+
+          
           }))
       
       );
@@ -92,13 +104,12 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
     
   };
 
-  const handleSubmit = (event) => {
-   let string = event
-   let newString = string.replace(/[{()}]/g, '') 
-   let split = newString.split(" ")
-    let abbr = []
-    abbr.push(split)
-    handleModal(abbr[0][2])
+  const handleSubmit = (object, value) => {
+    if (value !== null) {
+    handleModal(value)
+    } else {
+      console.log(value)
+    }
   }
 
   return (
@@ -113,12 +124,13 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
           deleteCountries={deleteCountries}
           countryId={countryId}
           countries={country}
+          countryName={countryName}
 
         />
       ) : null}
       <form>
       <Autocomplete
-      onChange={(event) => handleSubmit(event.target.innerText)}
+      onChange={handleSubmit}
       id="country-select-demo"
       style={{ width: 300 }}
       options={countries}
@@ -129,8 +141,8 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
       getOptionLabel={(option) => option.label}
       renderOption={(option) => (
         <React.Fragment>
-          <span>{countryToFlag(option.code)}</span>
-          {option.label} ({option.newCode}) +{option.phone} 
+          {countryToFlag(option.code)}
+          {option.label} ({option.code}) {option.newCode}
         </React.Fragment>
       )}
       renderInput={(params) => (
@@ -190,7 +202,7 @@ const countries = [
   { code: 'BM', label: 'Bermuda', phone: '1-441' },
   { code: 'BN', label: 'Brunei Darussalam', phone: '673' },
   { code: 'BO', label: 'Bolivia', phone: '591' },
-  { code: 'BR', label: 'Brazil', phone: '55' },
+  { code: 'BR', newCode: 'BRA', label: 'Brazil', phone: '55' },
   { code: 'BS', label: 'Bahamas', phone: '1-242' },
   { code: 'BT', label: 'Bhutan', phone: '975' },
   { code: 'BV', label: 'Bouvet Island', phone: '47' },
@@ -261,7 +273,7 @@ const countries = [
   { code: 'HT', label: 'Haiti', phone: '509' },
   { code: 'HU', label: 'Hungary', phone: '36' },
   { code: 'ID', label: 'Indonesia', phone: '62' },
-  { code: 'IE', label: 'Ireland', phone: '353' },
+  { code: 'IE', newCode: 'IRL', label: 'Ireland', phone: '353' },
   { code: 'IL', label: 'Israel', phone: '972' },
   { code: 'IM', label: 'Isle of Man', phone: '44' },
   { code: 'IN', label: 'India', phone: '91' },
