@@ -17,6 +17,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import ChatIcon from "@material-ui/icons/Chat";
+import CloseIcon from "@material-ui/icons/Close";
 import Logout from "../components/Logout";
 import Reviews from "./Reviews";
 
@@ -77,6 +79,11 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+
+  marginAutoItem: {
+    // margin: "auto",
+    marginLeft: "10px",
+  },
 }));
 
 export default function PersistentDrawerLeft() {
@@ -85,8 +92,6 @@ export default function PersistentDrawerLeft() {
   const [open, setOpen] = React.useState(false);
   const [logout, setLogout] = React.useState(false);
   const [openReview, setReview] = React.useState(false);
-
-  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,6 +105,7 @@ export default function PersistentDrawerLeft() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
+        style={{ background: "#333" }}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -118,8 +124,10 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h4" noWrap>
             ATLAS
           </Typography>
-
-          <Typography variant="h6" noWrap>
+          {/* <div className={classes.marginAutoItem}>
+            Welcome {localStorage.getItem("username")}
+          </div> */}
+          <Typography className={classes.marginAutoItem} variant="h6" noWrap>
             Welcome {localStorage.getItem("username")}
           </Typography>
         </Toolbar>
@@ -144,7 +152,7 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          {["Reviews", "Favorites", "Log Out", "Drafts"].map((text, index) =>
+          {["Reviews", "Log Out", "Favorites"].map((text, index) =>
             index === 2 ? (
               <ListItem
                 onClick={() => setLogout(true)}
@@ -153,7 +161,7 @@ export default function PersistentDrawerLeft() {
                 id={index}
               >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <ChatIcon /> : <CloseIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
@@ -165,14 +173,14 @@ export default function PersistentDrawerLeft() {
                 id={index}
               >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <ChatIcon /> : <CloseIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ) : (
               <ListItem button key={text} id={index}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <ChatIcon /> : <CloseIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>

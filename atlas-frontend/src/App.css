@@ -154,7 +154,7 @@ body {
 }
 
 /*
- * Affix and center
+ * Affix and center cover
  */
 
 @media (min-width: 768px) {
@@ -168,14 +168,13 @@ body {
     vertical-align: middle;
   }
 }
-
-
+/* 
+ancher tag country codes */
 
 .country-codes {
   color: rgba(16, 104, 204, 1);
-  
-  text-decoration: none;
 
+  text-decoration: none;
 }
 
 .country-codes:hover {
