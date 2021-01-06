@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import ReviewModal from './ReviewModal'
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -28,10 +29,11 @@ function rand() {
     },
   }));
   
-  export default function SimpleModal({handleAddReview, deleteCountries, handleSearch, event, changeModal, open}) {
+  export default function SimpleModal({ deleteCountries, handleSearch, event, changeModal, open}) {
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
+    const [reviewModal, renderReviewModal] = React.useState(false)
   
     // const handleOpen = () => {
     //   setOpen(true);
@@ -41,16 +43,23 @@ function rand() {
       changeModal(false);
     };
 
+   const handleAddReview = () => {
+      renderReviewModal(true)
+    }
+
   
     const body = (
       <div style={modalStyle} className={classes.paper}>
+       
         <h2 id="simple-modal-title">{event}</h2>
         <p id="simple-modal-description">
           Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
         </p>
-        <button onClick={() => handleSearch(event)}>Add to Places Visited</button>
-        <button onClick={() => handleAddReview()}>Add a Review</button>
+        <button onClick={() => handleSearch(event)} >Add to Places Visited</button>
+        <button onClick={() => handleAddReview()} >Add a Review</button>
         <button onClick={() => deleteCountries(event)}>Delete</button>
+       
+       
       </div>
     );
   
@@ -59,17 +68,23 @@ function rand() {
         {/* <button type="button" onClick={handleOpen}>
           Open Modal
         </button> */}
+       
         <Modal
+        
          open={open}
          onClose={handleClose}
-
 
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
-       
           {body}
+          
+          
         </Modal>
+        
+        {reviewModal === true ? <ReviewModal 
+          open={reviewModal} renderReviewModal={renderReviewModal}
+        /> : null} 
       </div>
     );
   }

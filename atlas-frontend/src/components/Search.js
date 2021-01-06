@@ -34,7 +34,7 @@ function Search({ handleAddReview, handleSearch, removeCountry}) {
     let newData = [];
     event.preventDefault();
     changeModal(true);
-    newEvent(event.target.search.value.toUpperCase());
+    newEvent(event.target.add.value.toUpperCase());
     document.getElementsByTagName("form")[0].reset();
     fetch("http://localhost:3000/api/v1/countries", {
       headers: { Authorization: `Bearer ${token}` },
@@ -79,11 +79,11 @@ function Search({ handleAddReview, handleSearch, removeCountry}) {
           <label>Add or Delete Country</label>
           <input
             type="text"
-            name="search"
+            name="add"
             placeholder="Alpha-3 code"
             className="form-control"
           />
-          <input type="submit" value="Search" className="btn btn-success" />
+          <input type="submit" value="add" className="btn btn-success" />
         </div>
       </form>
     </div>

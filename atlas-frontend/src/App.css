@@ -168,3 +168,16 @@ body {
     vertical-align: middle;
   }
 }
+
+
+
+.country-codes {
+  color: rgba(16, 104, 204, 1);
+  
+  text-decoration: none;
+
+}
+
+.country-codes:hover {
+  color: green;
+}

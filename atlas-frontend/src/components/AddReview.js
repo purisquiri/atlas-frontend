@@ -18,7 +18,8 @@ const AddReview = ({ review }) => {
             <Rating
               value={review.rating}
               max={5}
-              onChange={(value) => console.log(`Rated with value ${value}`)}
+              name="read-only"
+              readOnly
             />
             <p style={{ textAlign: "left" }}>{review.body}</p>
             <p style={{ textAlign: "left", color: "gray" }}>

@@ -78,6 +78,7 @@ export default function SignIn({ handleUser }) {
         handleUser(data.user);
         if (data.user) {
           history.push("/home");
+          window.location.reload()
         }
       });
     setUsername("");

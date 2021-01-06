@@ -8,7 +8,6 @@ const token = localStorage.getItem("token");
 const USERID = localStorage.getItem("user_id");
 const favoritesId = localStorage.getItem("favorites_id");
 
-
 class HomeContainer extends Component {
   constructor() {
     super();
@@ -112,8 +111,11 @@ class HomeContainer extends Component {
                   handleSearch={this.handleSearch}
                   setModal={this.setModal}
                   removeCountry={this.removeCountry}
+                  
                 />,
-                <a href="https://www.iban.com/country-codes" target="blank">Look up Country Codes</a>
+                <br/>,
+
+                <a className="country-codes" href="https://www.iban.com/country-codes" target="blank">Look up Country Codes</a>
               ]
             : null}
         </div>

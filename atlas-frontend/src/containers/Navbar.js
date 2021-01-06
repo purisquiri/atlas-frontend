@@ -20,7 +20,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import Logout from "../components/Logout";
 import Reviews from "./Reviews";
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,6 +85,8 @@ export default function PersistentDrawerLeft() {
   const [open, setOpen] = React.useState(false);
   const [logout, setLogout] = React.useState(false);
   const [openReview, setReview] = React.useState(false);
+
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);

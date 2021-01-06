@@ -14,28 +14,26 @@ const USERID = localStorage.getItem("user_id");
 const favoritesId = localStorage.getItem("favorites_id");
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      redirect: null,
-    };
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     redirect: null,
+  //   };
+  // }
 
   handleUser = (userData) => {
     localStorage.setItem("user_id", userData.id);
     localStorage.setItem("username", userData.username);
   };
 
-  handleAddReview = () => {
-    this.setState({
-      redirect: "/reviews",
-    });
-  };
+  // handleAddReview = () => {
+  //   this.setState({
+  //     redirect: "/reviews",
+  //   });
+  // };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
-    }
+   
     return (
       <div>
         <Route
@@ -53,13 +51,11 @@ class App extends Component {
         />
         <Route
           path="/home"
-          component={(props) => (
-            <HomeContainer {...props} handleAddReview={this.handleAddReview} />
-          )}
+          component={HomeContainer}
         />
         <Route exact path="/" component={Cover} />
         <Route exact path="/" component={Globe} />
-        <Route exact path="/reviews" component={Reviews} />
+        {/* <Route exact path="/reviews" component={Reviews} /> */}
       </div>
     );
   }
