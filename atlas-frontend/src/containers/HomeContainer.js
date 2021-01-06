@@ -16,13 +16,12 @@ class HomeContainer extends Component {
       loggedIn: false,
       countries: [],
       modalOpen: false,
-      countryId: ""
+      countryId: "",
     };
   }
 
   componentDidMount() {
-    if(token) {
-    
+    if (token) {
       fetch(`http://localhost:3000/api/v1/users/${USERID}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -34,8 +33,7 @@ class HomeContainer extends Component {
             })
           );
         });
-      }
-    
+    }
   }
 
   handleSearch = (event) => {
@@ -54,7 +52,6 @@ class HomeContainer extends Component {
               countryId: country.id,
             });
           } else if (this.state.countries.includes(undefined)) {
-          
             window.location.reload();
           }
         });
@@ -84,19 +81,16 @@ class HomeContainer extends Component {
   };
 
   removeCountry = (event) => {
-    let newCountry = this.state.countries.filter(country => country !== event)
+    let newCountry = this.state.countries.filter(
+      (country) => country !== event
+    );
     this.setState({
-      countries: newCountry
-    })
-    console.log(newCountry)
-  }
-
-
-
- 
+      countries: newCountry,
+    });
+    console.log(newCountry);
+  };
 
   setModal = (openOrClose) => this.setState({ modalOpen: openOrClose });
-
 
   render() {
     return (
@@ -111,11 +105,7 @@ class HomeContainer extends Component {
                   handleSearch={this.handleSearch}
                   setModal={this.setModal}
                   removeCountry={this.removeCountry}
-                  
                 />,
-                <br/>,
-
-                <a className="country-codes" href="https://www.iban.com/country-codes" target="blank">Look up Country Codes</a>
               ]
             : null}
         </div>

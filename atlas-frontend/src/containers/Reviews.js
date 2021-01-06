@@ -25,7 +25,10 @@ export default class Reviews extends Component {
     return (
       <div>
         <h1>Reviews</h1>
-        <ReviewsSearch reviews={this.state.reviews}/>
+        {this.state.reviews.map((review) => {
+        return <AddReview key={review.id} review={review} />;
+      })}
+        
         
       </div>
     );

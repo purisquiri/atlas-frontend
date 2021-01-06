@@ -35,6 +35,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
   const [event, newEvent] = useState("");
   const [country, newCountry] = useState([]);
   const [countryId, newId] = useState("");
+  const [countryName, newCountryName] = useState("")
 
   // useEffect(() => {
   //   if (event !== "") {
@@ -56,19 +57,34 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
 
   // });
 
-  const handleModal = (event) => {
-    let countryIds = [];
+
+  const handleModal = (value) => {
+    let countryCode = country.map(country => (
+       country.country_code
+    ))
+    let countryIds = []
+    
     changeModal(true);
-    newEvent(event);
+    newEvent(value.newCode);
+    newCountryName(value.label)
     document.getElementsByTagName("form")[0].reset();
     fetch("http://localhost:3000/api/v1/countries", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((resp) => resp.json())
-      .then((data) =>
-        data.filter((newestCountry) => {
-          newCountry((country) => [...country, newestCountry]);
-        })
+      .then(
+        (data) =>
+          (data.filter((newestCountry) => {
+            if (!countryCode.includes(newestCountry.country_code)) {
+              let filterCountry = newestCountry
+              newCountry(country => [...country, filterCountry])
+            }
+        
+            // newCountry(country => [...country, newestCountry.country_code])
+
+          
+          }))
+ 
       );
   };
 
@@ -90,14 +106,15 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
     removeCountry(event);
   };
 
-  const handleSubmit = (event) => {
-    let string = event;
-    let newString = string.replace(/[{()}]/g, "");
-    let split = newString.split(" ");
-    let abbr = [];
-    abbr.push(split);
-    handleModal(abbr[0][2]);
-  };
+
+  const handleSubmit = (object, value) => {
+    if (value !== null) {
+    handleModal(value)
+    } else {
+      console.log(value)
+    }
+  }
+
 
   return (
     <div>
@@ -111,16 +128,36 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
           deleteCountries={deleteCountries}
           countryId={countryId}
           countries={country}
+
+          countryName={countryName}
+
         />
       ) : null}
       <form>
-        <Autocomplete
-          onChange={(event) => handleSubmit(event.target.innerText)}
-          id="country-select-demo"
-          style={{ width: 300 }}
-          options={countries}
-          classes={{
-            option: classes.option,
+      <Autocomplete
+      onChange={handleSubmit}
+      id="country-select-demo"
+      style={{ width: 300 }}
+      options={countries}
+      classes={{
+        option: classes.option,
+      }}
+      autoHighlight
+      getOptionLabel={(option) => option.label}
+      renderOption={(option) => (
+        <React.Fragment>
+          {countryToFlag(option.code)}
+          {option.label} ({option.code}) {option.newCode}
+        </React.Fragment>
+      )}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Choose a country"
+          variant="outlined"
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: 'new-password', // disable autocomplete and autofill
           }}
           autoHighlight
           getOptionLabel={(option) => option.label}
