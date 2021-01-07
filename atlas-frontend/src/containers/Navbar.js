@@ -20,7 +20,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import ChatIcon from "@material-ui/icons/Chat";
 import CloseIcon from "@material-ui/icons/Close";
 import Logout from "../components/Logout";
-import {Route, useHistory} from 'react-router-dom'
+import { Route, useHistory } from "react-router-dom";
 import Reviews from "./Reviews";
 
 const drawerWidth = 400;
@@ -62,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    // justifyContent: "flex-end",
   },
   content: {
     flexGrow: 1,
@@ -103,13 +102,11 @@ export default function PersistentDrawerLeft() {
   };
 
   const openReviews = () => {
-    setReview(true)
+    setReview(true);
     if (openReview === true) {
-      setReview(false)
+      setReview(false);
     }
-
-  }
-
+  };
 
   return (
     <div className={classes.root}>
@@ -199,7 +196,7 @@ export default function PersistentDrawerLeft() {
         </List>
 
         {logout === true ? <Logout /> : null}
-        {openReview === true ?  <Reviews /> : null}
+        {openReview === true ? <Reviews /> : null}
         <Divider />
         {/* <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
