@@ -74,14 +74,14 @@ export default function SimpleModal({
         Add to Places Visited
       </Button>
       <Button onClick={() => handleAddReview()} fullWidth color="primary">
-        Add a Review
+        Add a Story
       </Button>
       <Button
         onClick={() => deleteCountries(event)}
         fullWidth
         color="secondary"
       >
-        Delete Visited
+        Remove Visited
       </Button>
     </div>
   );

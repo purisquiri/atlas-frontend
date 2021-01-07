@@ -272,7 +272,7 @@ const countries = [
   { code: "FO", newCode: "FRO", label: "Faroe Islands", phone: "298" },
   { code: "FR", newCode: "FRA", label: "France", phone: "33", suggested: true },
   { code: "GA", newCode: "GAB", label: "Gabon", phone: "241" },
-  { code: "GR", newCode: "GRB", label: "United Kingdom", phone: "44" },
+  { code: "GB", newCode: "GBR", label: "United Kingdom", phone: "44" },
   { code: "GD", newCode: "GRD", label: "Grenada", phone: "1-473" },
   { code: "GE", newCode: "GEO", label: "Georgia", phone: "995" },
   { code: "GF", newCode: "GUF", label: "French Guiana", phone: "594" },

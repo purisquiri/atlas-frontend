@@ -1,6 +1,7 @@
 import React from "react";
 import { Divider, Grid, Paper } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
+import Button from "@material-ui/core/Button";
 
 const userID = localStorage.getItem("user_id")
 const token = localStorage.getItem("token")
@@ -20,7 +21,6 @@ const AddReview = ({ key, review, removeReview }) => {
 
   return (
     <div style={{ padding: 14 }} className="App">
-    {console.log(review)}
       <Paper style={{ padding: "40px 20px" }}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item></Grid>
@@ -38,7 +38,7 @@ const AddReview = ({ key, review, removeReview }) => {
           </Grid>
         </Grid>
       {review.user.id === +userID ?
-      <button onClick={() => deleteReview()}>delete</button> :
+      <Button color='secondary' onClick={() => deleteReview()}>delete</Button> :
       null
       }
       </Paper> 

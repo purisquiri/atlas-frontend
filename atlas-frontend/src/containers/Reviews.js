@@ -21,24 +21,30 @@ export default class Reviews extends Component {
   }
 
   removeReview = (reviewId) => {
-    let filterReviews = this.state.reviews.filter(review => (
-      review.id !== reviewId
-    ))
+    let filterReviews = this.state.reviews.filter(
+      (review) => review.id !== reviewId
+    );
     this.setState({
-      reviews: filterReviews
-    })
-  }
-
-  
+      reviews: filterReviews,
+    });
+  };
 
   render() {
+    let sorted = this.state.reviews.sort(
+      (reviewA, reviewB) => reviewB.id - reviewA.id
+    );
     return (
       <div>
-        <h1>Reviews</h1>
-        
-        
-        {this.state.reviews.map((review) => {
-          return <AddReview key={review.id} review={review} removeReview={this.removeReview}/>
+        <h1 style={{textAlign:'center'}}>Stories</h1>
+
+        {sorted.map((review) => {
+          return (
+            <AddReview
+              key={review.id}
+              review={review}
+              removeReview={this.removeReview}
+            />
+          );
         })}
       </div>
     );
