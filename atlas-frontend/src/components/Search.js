@@ -130,7 +130,6 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
           countries={country}
 
           countryName={countryName}
-
         />
       ) : null}
       <form>
@@ -144,12 +143,14 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
       }}
       autoHighlight
       getOptionLabel={(option) => option.label}
+
       renderOption={(option) => (
-        <React.Fragment>
-          {countryToFlag(option.code)}
-          {option.label} ({option.code}) {option.newCode}
-        </React.Fragment>
-      )}
+            <React.Fragment>
+              <span>{countryToFlag(option.code)}</span>
+              {option.label} ({option.newCode})
+            </React.Fragment>
+          )}
+
       renderInput={(params) => (
         <TextField
           {...params}
@@ -159,34 +160,13 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill
           }}
-          autoHighlight
-          getOptionLabel={(option) => option.label}
-          renderOption={(option) => (
-            <React.Fragment>
-              <span>{countryToFlag(option.code)}</span>
-              {option.label} ({option.newCode}) +{option.phone}
-            </React.Fragment>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Choose a country"
-              variant="outlined"
-              inputProps={{
-                ...params.inputProps,
-                autoComplete: "new-password", // disable autocomplete and autofill
-              }}
-            />
-          )}
-        />
+          />
+      )}
+      />
+         
       </form>
-    </div>
+   </div>
 
-    //  <SearchBar onSubmit={(event) => handleSearch(event)}>
-    //  <label>Search by Country Code:</label>
-    //      <input type="text" name="search"  />
-    //      <input type="submit" value="Search" />
-    //   </SearchBar>
   );
 }
 
@@ -205,13 +185,7 @@ const countries = [
   { code: "AR", newCode: "ARG", label: "Argentina", phone: "54" },
   { code: "AS", newCode: "ASM", label: "American Samoa", phone: "1-684" },
   { code: "AT", newCode: "AUT", label: "Austria", phone: "43" },
-  {
-    code: "AU",
-    newCode: "AUS",
-    label: "Australia",
-    phone: "61",
-    suggested: true,
-  },
+  {code: "AU", newCode: "AUS", label: "Australia", phone: "61", suggested: true,},
   { code: "AW", newCode: "ABW", label: "Aruba", phone: "297" },
   { code: "AX", newCode: "ALA", label: "Alland Islands", phone: "358" },
   { code: "AZ", newCode: "AZE", label: "Azerbaijan", phone: "994" },
