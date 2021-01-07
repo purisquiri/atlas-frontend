@@ -2,14 +2,25 @@ import React from "react";
 import { Divider, Grid, Paper } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 
-const AddReview = ({ key, review }) => {
+const userID = localStorage.getItem("user_id")
+const token = localStorage.getItem("token")
+
+const AddReview = ({ key, review, removeReview }) => {
   let theDate = new Date(review.created_at);
   let dateString = theDate.toDateString();
 
+  const deleteReview = () => {
+    fetch(`http://localhost:3000/api/v1/reviews/${review.id}`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`}
+  })
+  removeReview(review.id)
+  }
+
   return (
-   
     <div style={{ padding: 14 }} className="App">
-    {review.user && review.country !== null ?
+    {console.log(review)}
       <Paper style={{ padding: "40px 20px" }}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item></Grid>
@@ -26,9 +37,12 @@ const AddReview = ({ key, review }) => {
             </p>
           </Grid>
         </Grid>
-      </Paper> : 
+      {review.user.id === +userID ?
+      <button onClick={() => deleteReview()}>delete</button> :
       null
       }
+      </Paper> 
+
     </div>
   );
 };

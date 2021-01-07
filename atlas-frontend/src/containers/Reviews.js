@@ -20,16 +20,27 @@ export default class Reviews extends Component {
       .then((data) => this.setState({ reviews: data }));
   }
 
+  removeReview = (reviewId) => {
+    let filterReviews = this.state.reviews.filter(review => (
+      review.id !== reviewId
+    ))
+    this.setState({
+      reviews: filterReviews
+    })
+  }
+
+  
+
   render() {
     return (
       <div>
         <h1>Reviews</h1>
+        
+        
         {this.state.reviews.map((review) => {
-         return <AddReview key={review.id} review={review} /> 
-        {/* console.log(review) */}
+          return <AddReview key={review.id} review={review} removeReview={this.removeReview}/>
         })}
       </div>
     );
   }
 }
-

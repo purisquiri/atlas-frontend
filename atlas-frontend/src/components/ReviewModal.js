@@ -59,6 +59,7 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (text !== "") {
     fetch("http://localhost:3000/api/v1/reviews", {
       method: "POST",
       headers: {
@@ -76,11 +77,14 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
       .then((resp) => resp.json())
       .then((data) => console.log(data));
     document.getElementsByTagName("form")[1].reset();
+  } else{
+    alert("Cannoy submit empty story")
+  }
   };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Add Review</h2>
+      <h2 id="simple-modal-title">Add a Story</h2>
 
       <form
         className={classes.root}

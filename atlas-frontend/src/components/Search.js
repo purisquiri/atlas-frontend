@@ -110,9 +110,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
   const handleSubmit = (object, value) => {
     if (value !== null) {
     handleModal(value)
-    } else {
-      console.log(value)
-    }
+    } 
   }
 
 
