@@ -20,6 +20,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import ChatIcon from "@material-ui/icons/Chat";
 import CloseIcon from "@material-ui/icons/Close";
 import Logout from "../components/Logout";
+import {Route, useHistory} from 'react-router-dom'
 import Reviews from "./Reviews";
 
 const drawerWidth = 400;
@@ -101,6 +102,15 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const openReviews = () => {
+    setReview(true)
+    if (openReview === true) {
+      setReview(false)
+    }
+
+  }
+
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -167,7 +177,7 @@ export default function PersistentDrawerLeft() {
               </ListItem>
             ) : index === 0 ? (
               <ListItem
-                onClick={() => setReview(true)}
+                onClick={() => openReviews()}
                 button
                 key={text}
                 id={index}
@@ -189,7 +199,7 @@ export default function PersistentDrawerLeft() {
         </List>
 
         {logout === true ? <Logout /> : null}
-        {openReview === true ? <Reviews /> : null}
+        {openReview === true ?  <Reviews /> : null}
         <Divider />
         {/* <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (

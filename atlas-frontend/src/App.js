@@ -3,23 +3,14 @@ import HomeContainer from "./containers/HomeContainer";
 
 import SignIn from "./containers/LoginContainer";
 import SignUp from "./containers/SignUpContainer";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Globe from "./components/Globe";
 import Cover from "./components/Cover";
-import Reviews from "./containers/Reviews";
+
 import "./App.css";
 
-const token = localStorage.getItem("token");
-const USERID = localStorage.getItem("user_id");
-const favoritesId = localStorage.getItem("favorites_id");
-
 class App extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     redirect: null,
-  //   };
-  // }
+ 
 
   handleUser = (userData) => {
     localStorage.setItem("user_id", userData.id);

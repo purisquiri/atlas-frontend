@@ -2,12 +2,14 @@ import React from "react";
 import { Divider, Grid, Paper } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 
-const AddReview = ({ review, event }) => {
+const AddReview = ({ key, review }) => {
   let theDate = new Date(review.created_at);
   let dateString = theDate.toDateString();
 
   return (
+   
     <div style={{ padding: 14 }} className="App">
+    {review.user && review.country !== null ?
       <Paper style={{ padding: "40px 20px" }}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item></Grid>
@@ -24,7 +26,9 @@ const AddReview = ({ review, event }) => {
             </p>
           </Grid>
         </Grid>
-      </Paper>
+      </Paper> : 
+      null
+      }
     </div>
   );
 };

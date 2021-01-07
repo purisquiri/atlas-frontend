@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import AddReview from "../components/AddReview";
-import ReviewsSearch from "../components/ReviewsSearch"
 
 const token = localStorage.getItem("token");
 
@@ -27,9 +26,9 @@ export default class Reviews extends Component {
         <h1>Reviews</h1>
         {this.state.reviews.map((review) => {
         return <AddReview key={review.id} review={review} />;
+        {/* console.log(review) */}
+
       })}
-        
-        
       </div>
     );
   }
