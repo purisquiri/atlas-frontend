@@ -4,6 +4,7 @@ import SimpleModal from "./Modal";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { makeStyles } from "@material-ui/core/styles";
+import "../App.css";
 
 const token = localStorage.getItem("token");
 
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
     fontSize: 15,
     "& > span": {
       marginRight: 10,
-      fontSize: 18,
+      fontSize: 15,
     },
   },
 });
@@ -35,7 +36,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
   const [event, newEvent] = useState("");
   const [country, newCountry] = useState([]);
   const [countryId, newId] = useState("");
-  const [countryName, newCountryName] = useState("")
+  const [countryName, newCountryName] = useState("");
 
   // useEffect(() => {
   //   if (event !== "") {
@@ -57,34 +58,27 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
 
   // });
 
-
   const handleModal = (value) => {
-    let countryCode = country.map(country => (
-       country.country_code
-    ))
-    let countryIds = []
-    
+    let countryCode = country.map((country) => country.country_code);
+    let countryIds = [];
+
     changeModal(true);
     newEvent(value.newCode);
-    newCountryName(value.label)
+    newCountryName(value.label);
     document.getElementsByTagName("form")[0].reset();
     fetch("http://localhost:3000/api/v1/countries", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((resp) => resp.json())
-      .then(
-        (data) =>
-          (data.filter((newestCountry) => {
-            if (!countryCode.includes(newestCountry.country_code)) {
-              let filterCountry = newestCountry
-              newCountry(country => [...country, filterCountry])
-            }
-        
-            // newCountry(country => [...country, newestCountry.country_code])
+      .then((data) =>
+        data.filter((newestCountry) => {
+          if (!countryCode.includes(newestCountry.country_code)) {
+            let filterCountry = newestCountry;
+            newCountry((country) => [...country, filterCountry]);
+          }
 
-          
-          }))
- 
+          // newCountry(country => [...country, newestCountry.country_code])
+        })
       );
   };
 
@@ -106,16 +100,14 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
     removeCountry(event);
   };
 
-
   const handleSubmit = (object, value) => {
     if (value !== null) {
-    handleModal(value)
-    } 
-  }
-
+      handleModal(value);
+    }
+  };
 
   return (
-    <div>
+    <div className="search-bar">
       {modal ? (
         <SimpleModal
           handleAddReview={handleAddReview}
@@ -126,45 +118,40 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
           deleteCountries={deleteCountries}
           countryId={countryId}
           countries={country}
-
           countryName={countryName}
         />
       ) : null}
       <form>
-      <Autocomplete
-      onChange={handleSubmit}
-      id="country-select-demo"
-      style={{ width: 300 }}
-      options={countries}
-      classes={{
-        option: classes.option,
-      }}
-      autoHighlight
-      getOptionLabel={(option) => option.label}
-
-      renderOption={(option) => (
+        <Autocomplete
+          onChange={handleSubmit}
+          id="country-select-demo"
+          style={{ width: 300 }}
+          options={countries}
+          classes={{
+            option: classes.option,
+          }}
+          autoHighlight
+          getOptionLabel={(option) => option.label}
+          renderOption={(option) => (
             <React.Fragment>
               <span>{countryToFlag(option.code)}</span>
               {option.label} ({option.newCode})
             </React.Fragment>
           )}
-
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Choose a country"
-          variant="outlined"
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
-          }}
-          />
-      )}
-      />
-         
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Choose a country"
+              variant="outlined"
+              inputProps={{
+                ...params.inputProps,
+                autoComplete: "new-password", // disable autocomplete and autofill
+              }}
+            />
+          )}
+        />
       </form>
-   </div>
-
+    </div>
   );
 }
 
@@ -183,7 +170,13 @@ const countries = [
   { code: "AR", newCode: "ARG", label: "Argentina", phone: "54" },
   { code: "AS", newCode: "ASM", label: "American Samoa", phone: "1-684" },
   { code: "AT", newCode: "AUT", label: "Austria", phone: "43" },
-  {code: "AU", newCode: "AUS", label: "Australia", phone: "61", suggested: true,},
+  {
+    code: "AU",
+    newCode: "AUS",
+    label: "Australia",
+    phone: "61",
+    suggested: true,
+  },
   { code: "AW", newCode: "ABW", label: "Aruba", phone: "297" },
   { code: "AX", newCode: "ALA", label: "Alland Islands", phone: "358" },
   { code: "AZ", newCode: "AZE", label: "Azerbaijan", phone: "994" },
@@ -351,6 +344,7 @@ const countries = [
   { code: "KW", newCode: "KWT", label: "Kuwait", phone: "965" },
   { code: "KY", newCode: "CYM", label: "Cayman Islands", phone: "1-345" },
   { code: "KZ", newCode: "KAZ", label: "Kazakhstan", phone: "7" },
+  { code: "XK", newCode: "UNK", label: "Kozovo", phone: "7" },
   {
     code: "LA",
     newCode: "LAO",

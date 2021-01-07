@@ -3,21 +3,23 @@ import { Divider, Grid, Paper } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import Button from "@material-ui/core/Button";
 
-const userID = localStorage.getItem("user_id")
-const token = localStorage.getItem("token")
+const userID = localStorage.getItem("user_id");
+const token = localStorage.getItem("token");
 
-const AddReview = ({ key, review, removeReview }) => {
+const AddReview = ({ review, removeReview }) => {
   let theDate = new Date(review.created_at);
   let dateString = theDate.toDateString();
 
   const deleteReview = () => {
     fetch(`http://localhost:3000/api/v1/reviews/${review.id}`, {
-    method: 'DELETE',
-    headers: {'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`}
-  })
-  removeReview(review.id)
-  }
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    removeReview(review.id);
+  };
 
   return (
     <div style={{ padding: 14 }} className="App">
@@ -37,12 +39,12 @@ const AddReview = ({ key, review, removeReview }) => {
             </p>
           </Grid>
         </Grid>
-      {review.user.id === +userID ?
-      <Button color='secondary' onClick={() => deleteReview()}>delete</Button> :
-      null
-      }
-      </Paper> 
-
+        {review.user.id === +userID ? (
+          <Button color="secondary" onClick={() => deleteReview()}>
+            delete
+          </Button>
+        ) : null}
+      </Paper>
     </div>
   );
 };

@@ -1,21 +1,14 @@
-import React from 'react';
-import AddReview from './AddReview'
+import React from "react";
+import AddReview from "./AddReview";
 
 const ReviewsSearch = () => {
-    {this.state.reviews.map((review) => {
-        return <AddReview key={review.id} review={review} />;
-      })}
+  {
+    this.state.reviews.map((review) => {
+      return <AddReview review={review} />;
+    });
+  }
 
-    
-    
-
-    return (
-        <div>
-            
-        </div>
-    );
-}
+  return <div></div>;
+};
 
 export default ReviewsSearch;
-
-

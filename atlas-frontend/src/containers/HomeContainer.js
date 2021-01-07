@@ -95,20 +95,19 @@ class HomeContainer extends Component {
   render() {
     return (
       <div>
-        <div>
-          {token
-            ? [
-                <Navbar key={1} />,
-                <Search
-                  handleAddReview={this.props.handleAddReview}
-                  key={2}
-                  handleSearch={this.handleSearch}
-                  setModal={this.setModal}
-                  removeCountry={this.removeCountry}
-                />,
-              ]
-            : null}
-        </div>
+        {token
+          ? [
+              <Navbar key={1} />,
+              <Search
+                handleAddReview={this.props.handleAddReview}
+                key={2}
+                handleSearch={this.handleSearch}
+                setModal={this.setModal}
+                removeCountry={this.removeCountry}
+              />,
+            ]
+          : null}
+
         <MapboxGLMap key={3} countries={this.state.countries} />
         {this.state.countryId !== "" ? (
           <FavoritesContainer key={4} countryId={this.state.countryId} />

@@ -64,9 +64,9 @@ export default function SimpleModal({
       >
         {countryName}
       </h2>
-      <p id="simple-modal-description">
+      {/* <p id="simple-modal-description">
         Click to choose an option or click the map to leave
-      </p>
+      </p> */}
       {/* <button onClick={() => handleSearch(event)}>Add to Places Visited</button> */}
       {/* <button onClick={() => handleAddReview()}>Add a Review</button>
       <button onClick={() => deleteCountries(event)}>Delete</button> */}
