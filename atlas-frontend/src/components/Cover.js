@@ -8,10 +8,13 @@ export default function Cover() {
           <div className="container">
             <div className="masthead clearfix">
               <div className="container inner">
-                <h3 className="masthead-brand"></h3>
+                <h3 className="masthead-brand">WELCOME TO ATLAS</h3>
+                <h4 className="masthead-slogan">
+                  THE WHOLE WORLD AT YOUR HANDS
+                </h4>
                 <nav>
                   <ul className="nav masthead-nav">
-                    <li className="active">
+                    <li>
                       <a href="/home">Map</a>
                     </li>
                     <li>

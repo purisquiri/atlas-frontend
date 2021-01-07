@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     position: "absolute",
-    width: 400,
+    width: 300,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -73,9 +73,9 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
         body: text,
       }),
     })
-    .then(resp => resp.json())
-    .then(data => console.log(data))
-    document.getElementsByTagName('form')[1].reset()
+      .then((resp) => resp.json())
+      .then((data) => console.log(data));
+    document.getElementsByTagName("form")[1].reset();
   };
 
   const body = (
@@ -89,6 +89,7 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
         onSubmit={(e) => handleSubmit(e)}
       >
         <Rating
+          style={{ width: 200 }}
           name="simple-controlled"
           value={value}
           onChange={(event, newValue) => {
@@ -101,13 +102,7 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
           placeholder=""
           onChange={(event) => setText(event.target.value)}
         />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-        >
+        <Button type="submit" color="primary" className={classes.submit}>
           Submit
         </Button>
       </form>

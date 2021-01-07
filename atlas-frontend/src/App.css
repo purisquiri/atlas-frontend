@@ -1,8 +1,11 @@
-/* body {
-  background-image: url("https://i.imgur.com/2DHohU3.jpg");
- 
-} */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*SVG globe first page*/
 .globe {
   border: 4px solid #8bc34a;
   border-radius: 50%;
@@ -39,48 +42,13 @@
     transform: translateX(-50%);
   }
 }
-
-/* COVER */
-
-a,
-a:focus,
-a:hover {
-  color: #fff;
-}
-
-/* Custom default button */
-.btn-default,
-.btn-default:hover,
-.btn-default:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritence from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
-}
-
-/*
- * Base structure
- */
-
-html,
-body {
-  height: 100%;
-  background-color: #fff;
-}
-body {
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
+/*COVER FIRST PAGE*/
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;
   width: 100%;
   height: 100vh;
   background-color: #333;
-  /*height: 100%; */
-  /*min-height: 100%;*/
 }
 .site-wrapper-inner {
   display: table-cell;
@@ -100,8 +68,16 @@ body {
  * Header
  */
 .masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  /* margin-top: 10px;
+  margin-bottom: 10px; */
+  color: #8bc34a;
+  font-size: 48px;
+  margin: auto;
+  font-family: "Raleway", sans-serif;
+}
+.masthead-slogan {
+  color: #8bc34a;
+  font-size: 24px;
 }
 
 .masthead-nav > li {
@@ -134,23 +110,11 @@ body {
 
 @media (min-width: 768px) {
   .masthead-brand {
-    float: left;
-  }
-  .masthead-nav {
     float: right;
   }
-}
-
-/*
- * Cover
- */
-
-.cover {
-  padding: 0 20px;
-}
-.cover .btn-lg {
-  padding: 10px 20px;
-  font-weight: bold;
+  .masthead-nav {
+    float: left;
+  }
 }
 
 /*
@@ -167,16 +131,4 @@ body {
   .site-wrapper-inner {
     vertical-align: middle;
   }
-}
-/* 
-ancher tag country codes */
-
-.country-codes {
-  color: rgba(16, 104, 204, 1);
-
-  text-decoration: none;
-}
-
-.country-codes:hover {
-  color: green;
 }
