@@ -83,10 +83,13 @@ export default function SignUp({ handleUser }) {
       .then((data) => {
         console.log(data);
         localStorage.setItem("token", data.jwt);
-        handleUser(data.user);
+       
         if(data.user) {
+        handleUser(data.user);
         history.push("/home");
         window.location.reload()
+        } else{
+          alert("Please fill in empty fields")
         }
       })  
       .catch((errors) => {

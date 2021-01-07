@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SearchBar from "material-ui-search-bar";
+
 import SimpleModal from "./Modal";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";

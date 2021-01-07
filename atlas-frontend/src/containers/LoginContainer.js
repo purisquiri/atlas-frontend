@@ -75,10 +75,12 @@ export default function SignIn({ handleUser }) {
       .then((resp) => resp.json())
       .then((data) => {
         localStorage.setItem("token", data.jwt);
-        handleUser(data.user);
-        if (data.user) {
+        if (data.user !== undefined) {
+          handleUser(data.user);
           history.push("/home");
           window.location.reload()
+        } else {
+          alert("Incorrect credentials")
         }
       });
     setUsername("");

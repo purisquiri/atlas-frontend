@@ -60,26 +60,26 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (text !== "") {
-    fetch("http://localhost:3000/api/v1/reviews", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer  ${token}`,
-      },
-      body: JSON.stringify({
-        user_id: userId,
-        country_id: countryId,
-        rating: value,
-        body: text,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => console.log(data));
-    document.getElementsByTagName("form")[1].reset();
-  } else{
-    alert("Cannoy submit empty story")
-  }
+      fetch("http://localhost:3000/api/v1/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer  ${token}`,
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          country_id: countryId,
+          rating: value,
+          body: text,
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((data) => console.log(data));
+      document.getElementsByTagName("form")[1].reset();
+    } else {
+      alert("Cannoy submit empty story");
+    }
   };
 
   const body = (
