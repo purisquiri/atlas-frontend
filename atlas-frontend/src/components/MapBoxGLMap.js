@@ -14,7 +14,7 @@ const MapboxGLMap = ({ countries }) => {
     const map = new mapboxgl.Map({
       container: "map",
       style: "mapbox://styles/jacobkagon/ckjak6kt589rb19p228nwrycv", // stylesheet location
-      center: [5, 46],
+      center: [15, 25],
       zoom: 2,
     });
 
