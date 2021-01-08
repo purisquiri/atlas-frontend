@@ -51,12 +51,18 @@ class HomeContainer extends Component {
               countries: [...this.state.countries, country.country_code],
               countryId: country.id,
             });
+            //Add this if below doesn't work
           } else if (this.state.countries.includes(undefined)) {
             window.location.reload();
           }
         });
+        let newCodes = data.map((country) => {
+          return country.country_code;
+        });
+        if (!newCodes.includes(event)) {
+          this.addCountry(event);
+        }
       });
-    this.addCountry(event);
   };
 
   addCountry = (event) => {
@@ -95,19 +101,20 @@ class HomeContainer extends Component {
   render() {
     return (
       <div>
-        {token
-          ? [
-              <Navbar key={1} />,
-              <Search
-                handleAddReview={this.props.handleAddReview}
-                key={2}
-                handleSearch={this.handleSearch}
-                setModal={this.setModal}
-                removeCountry={this.removeCountry}
-              />,
-            ]
-          : null}
-
+        <div>
+          {token
+            ? [
+                <Navbar key={1} />,
+                <Search
+                  handleAddReview={this.props.handleAddReview}
+                  key={2}
+                  handleSearch={this.handleSearch}
+                  setModal={this.setModal}
+                  removeCountry={this.removeCountry}
+                />,
+              ]
+            : null}
+        </div>
         <MapboxGLMap key={3} countries={this.state.countries} />
         {this.state.countryId !== "" ? (
           <FavoritesContainer key={4} countryId={this.state.countryId} />

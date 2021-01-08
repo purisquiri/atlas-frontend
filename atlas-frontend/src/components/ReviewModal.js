@@ -77,6 +77,8 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
         .then((resp) => resp.json())
         .then((data) => console.log(data));
       document.getElementsByTagName("form")[1].reset();
+      setValue(0)
+
     } else {
       alert("Cannoy submit empty story");
     }
