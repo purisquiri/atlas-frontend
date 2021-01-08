@@ -80,7 +80,7 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
       setValue(0)
 
     } else {
-      alert("Cannoy submit empty story");
+      alert("Cannot submit empty story");
     }
   };
 

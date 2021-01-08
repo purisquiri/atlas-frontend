@@ -10,7 +10,7 @@ export default function Cover() {
               <div className="container inner">
                 <h3 className="masthead-brand">WELCOME TO ATLAS</h3>
                 <h4 className="masthead-slogan" >
-                  THE WHOLE WORLD IN YOUR HANDS
+                     YOUR NEW ADVENTURES LOG
                 </h4>
                 <nav>
                   <ul className="nav masthead-nav">

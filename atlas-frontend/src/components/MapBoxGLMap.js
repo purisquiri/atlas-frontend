@@ -15,7 +15,7 @@ const MapboxGLMap = ({ countries }) => {
       container: "map",
       style: "mapbox://styles/jacobkagon/ckjak6kt589rb19p228nwrycv", // stylesheet location
       center: [15, 25],
-      zoom: 2,
+      zoom: 1.5,
     });
 
     map.on("load", () => {

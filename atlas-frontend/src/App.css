@@ -74,17 +74,19 @@ body {
   font-size: 48px;
   margin: auto;
   font-family: "Raleway", sans-serif;
+  
 }
 .masthead-slogan {
   color: #8bc34a;
   font-size: 24px;
+  margin: 0 0 0 50px;
 }
 
 .masthead-nav > li {
   display: inline-block;
 }
 .masthead-nav > li + li {
-  margin-left: 20px;
+   margin-left: 20px; 
 }
 .masthead-nav > li > a {
   padding-right: 0;
