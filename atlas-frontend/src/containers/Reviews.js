@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import AddReview from "../components/AddReview";
+import instance from "../BaseUrl";
 
 const token = localStorage.getItem("token");
 
@@ -13,7 +14,7 @@ export default class Reviews extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/reviews", {
+    fetch(`${instance()}/reviews`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((resp) => resp.json())
@@ -35,7 +36,7 @@ export default class Reviews extends Component {
     );
     return (
       <div>
-        <h1 style={{textAlign:'center'}}>Stories</h1>
+        <h1 style={{ textAlign: "center" }}>Stories</h1>
 
         {sorted.map((review) => {
           return (

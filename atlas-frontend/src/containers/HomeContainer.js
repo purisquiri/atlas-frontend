@@ -3,10 +3,12 @@ import MapboxGLMap from "../components/MapBoxGLMap";
 import Search from "../components/Search";
 import Navbar from "./Navbar";
 import FavoritesContainer from "./FavoritesContainer";
+import instance from '../BaseUrl'
 
 const token = localStorage.getItem("token");
 const USERID = localStorage.getItem("user_id");
 const favoritesId = localStorage.getItem("favorites_id");
+
 
 class HomeContainer extends Component {
   constructor() {
@@ -22,7 +24,7 @@ class HomeContainer extends Component {
 
   componentDidMount() {
     if (token) {
-      fetch(`http://localhost:3000/api/v1/users/${USERID}`, {
+      fetch(`${instance()}/users/${USERID}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((resp) => resp.json())
@@ -37,7 +39,7 @@ class HomeContainer extends Component {
   }
 
   handleSearch = (event) => {
-    fetch("http://localhost:3000/api/v1/countries", {
+    fetch(`${instance()}/countries`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((resp) => resp.json())
@@ -66,7 +68,7 @@ class HomeContainer extends Component {
   };
 
   addCountry = (event) => {
-    fetch("http://localhost:3000/api/v1/countries", {
+    fetch(`${instance()}/countries`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

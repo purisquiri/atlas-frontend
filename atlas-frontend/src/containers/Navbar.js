@@ -22,6 +22,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Logout from "../components/Logout";
 import { Route, useHistory } from "react-router-dom";
 import Reviews from "./Reviews";
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 const drawerWidth = 400;
 
@@ -79,6 +80,28 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  spanDrawer: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 15),
+    // necessary for content to be below app bar
+  },
+  name: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 14),
+    marginLeft: 20,
+    // necessary for content to be below app bar
+  },
+  nameTwo: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 14),
+    marginLeft: 20,
+    // necessary for content to be below app bar
+  },
+
+
 
   marginAutoItem: {
     // margin: "auto",
@@ -198,6 +221,18 @@ export default function PersistentDrawerLeft() {
         {logout === true ? <Logout /> : null}
         {openReview === true ? <Reviews /> : null}
         <Divider />
+        <h3 className={classes.spanDrawer}>Created By: </h3>
+        <div className={classes.name}>
+          <GitHubIcon />
+          <h5><a href='https://github.com/purisquiri' target='_blank'>Mauro</a></h5>
+        </div>
+        <div className={classes.nameTwo}>
+          <GitHubIcon />
+          
+          <h5> <a href='https://github.com/jacobkagon' target='_blank'>Jacob </a> </h5>
+          
+        </div>
+
         {/* <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem button key={text}>

@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { makeStyles } from "@material-ui/core/styles";
 import "../App.css";
+import instance from '../BaseUrl'
 
 const token = localStorage.getItem("token");
 
@@ -66,7 +67,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
     newEvent(value.newCode);
     newCountryName(value.label);
     document.getElementsByTagName("form")[0].reset();
-    fetch("http://localhost:3000/api/v1/countries", {
+    fetch(`${instance()}/countries`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((resp) => resp.json())
@@ -93,7 +94,7 @@ function Search({ handleAddReview, handleSearch, removeCountry }) {
     country.filter((country) =>
       country.country_code === event ? (countryIds = country.id) : null
     );
-    fetch(`http://localhost:3000/api/v1/favorites/${USERID}/${countryIds}`, {
+    fetch(`${instance()}/favorites/${USERID}/${countryIds}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

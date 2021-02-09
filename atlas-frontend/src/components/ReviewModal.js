@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
 import Rating from "@material-ui/lab/Rating";
+import instance from '../BaseUrl'
 
 const userId = localStorage.getItem("user_id");
 const token = localStorage.getItem("token");
@@ -60,7 +61,7 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (text !== "") {
-      fetch("http://localhost:3000/api/v1/reviews", {
+      fetch(`${instance()}/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +76,7 @@ const ReviewModal = ({ open, renderReviewModal, countries, event }) => {
         }),
       })
         .then((resp) => resp.json())
-        .then((data) => console.log(data));
+        // .then((data) => console.log(data));
       document.getElementsByTagName("form")[1].reset();
       setValue(0)
 

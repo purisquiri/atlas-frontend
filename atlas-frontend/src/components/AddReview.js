@@ -2,6 +2,7 @@ import React from "react";
 import { Divider, Grid, Paper } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import Button from "@material-ui/core/Button";
+import instance from '../BaseUrl'
 
 const userID = localStorage.getItem("user_id");
 const token = localStorage.getItem("token");
@@ -9,9 +10,9 @@ const token = localStorage.getItem("token");
 const AddReview = ({ review, removeReview }) => {
   let theDate = new Date(review.created_at);
   let dateString = theDate.toDateString();
-
   const deleteReview = () => {
-    fetch(`http://localhost:3000/api/v1/reviews/${review.id}`, {
+    fetch(`${instance()}/reviews/${review.id}`, {
+     
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

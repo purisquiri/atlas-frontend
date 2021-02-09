@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import instance from '../BaseUrl'
 
 const token = localStorage.getItem("token");
 const USERID = localStorage.getItem("user_id");
+
 
 const FavoritesContainer = ({ countryId, changeFavorites }) => {
   //   componentDidMount() {
@@ -16,7 +18,7 @@ const FavoritesContainer = ({ countryId, changeFavorites }) => {
   //   }
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/favorites", {
+    fetch(`${instance()}/favorites`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Login from "../Login.css";
 import { BrowserRouter as Router, useHistory } from "react-router-dom";
+import instance from '../BaseUrl'
 
 function Copyright() {
   return (
@@ -61,7 +62,7 @@ export default function SignUp({ handleUser }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch(`${instance()}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
